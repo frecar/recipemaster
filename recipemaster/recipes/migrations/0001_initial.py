@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Recipe',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True,
+                 auto_created=True)),
                 ('url', models.URLField()),
                 ('title', models.CharField(max_length=255)),
             ],
@@ -26,8 +27,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RecipeCollection',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('recipes', models.ManyToManyField(related_name='collections', to='recipes.Recipe')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True,
+                 auto_created=True)),
+                ('recipes', models.ManyToManyField(related_name='collections',
+                 to='recipes.Recipe')),
                 ('users', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
