@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'recipemaster.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^recipes/', include('recipemaster.recipes.urls', namespace='recipes')),
     url(r'^admin/', include(admin.site.urls)),
 )

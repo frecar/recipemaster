@@ -1,0 +1,13 @@
+{% if latest_recipe_list %}
+    <ul>
+        {% for recipe in latest_recipe_list %}
+            <li><a href="{% url 'recipes:recipe_details' recipe.id %}">{{ recipe.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recipes available</p>
+{% endif %}
+
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}"/>
