@@ -55,3 +55,4 @@ target/
 
 
 db.sqlite3
+recipemaster/instance_settings.py
