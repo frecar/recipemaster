@@ -5,9 +5,30 @@
     background-position: center 30%;
     background-repeat: no-repeat;
 }
-li a {
+.header h1 {
+    font-size: 3.5em;
+    margin-bottom: 2px;
+
+}
+.header .lead {
+    padding-left: 40px;
+    font-size: 1.5em;
     color: black;
 }
+.content {
+    margin-top: 1em;
+}
+
+
+.recipe-list {
+    font-size: ;
+}
+.recipe-list li a {
+    color: #444444;
+    font-size: 2em;
+}
+
+
 
 
 
