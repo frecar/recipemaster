@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 {% if latest_recipe_list %}
     <ul>
         {% for recipe in latest_recipe_list %}
@@ -8,6 +10,5 @@
     <p>No recipes available</p>
 {% endif %}
 
-{% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}"/>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}"/>
+</head>
+
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="header col-xs-12">
+             <h1>Recipemaster</h1>
+        </div>
+
+    </div>
+
+
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
