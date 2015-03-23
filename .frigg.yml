@@ -1,0 +1,9 @@
+tasks:
+  - tox
+  - flake8
+  - coverage report
+  - coverage xml
+
+coverage:
+  path: coverage.xml
+  parser: python
