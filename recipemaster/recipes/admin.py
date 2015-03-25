@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Recipe, RecipeCollection
+from .models import Recipe, RecipeCollection, Tag
 
 
 class RecipeAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class RecipeAdmin(admin.ModelAdmin):
 
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeCollection)
+admin.site.register(Tag)

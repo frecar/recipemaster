@@ -5,6 +5,7 @@ from django.db import models
 class Recipe(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
+    tags = models.ManyToManyField(Tag, related_name='recipes')
 
     def __str__(self):
         return self.title
@@ -13,6 +14,12 @@ class Recipe(models.Model):
 class RecipeCollection(models.Model):
     recipes = models.ManyToManyField(Recipe, related_name='collections')
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+class Tag(models.Model):
     title = models.CharField(max_length=255)
 
     def __str__(self):
