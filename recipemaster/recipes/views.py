@@ -4,7 +4,7 @@ from recipemaster.recipes.models import Recipe
 
 
 def index(request):
-    latest_recipe_list = Recipe.objects.order_by('-id')[:5]
+    latest_recipe_list = Recipe.objects.order_by('-id')
     context = {'latest_recipe_list': latest_recipe_list}
     return render(request, 'recipes/index.html', context)
 
