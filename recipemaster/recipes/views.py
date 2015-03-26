@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from recipemaster.recipes.models import Recipe, Tag
 # Create your views here.
 
