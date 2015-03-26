@@ -18,7 +18,9 @@
 .content {
     margin-top: 1em;
 }
-
+.recipe-list li {
+    margin-top: 1.0em;
+}
 .recipe-list li a {
     color: #444444;
     font-size: 2em;
