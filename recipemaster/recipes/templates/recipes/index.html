@@ -10,7 +10,7 @@
 
                             <div class="tags" style="float: right;">
                                 {% for tag in recipe.tags.all %}
-                                <span class="label label-default" style="background-color: {{tag.color}}">{{ tag }}</span>
+                                    <a href="{% url 'recipes:tag_filter' tag.id %}" class="label label-default" style="background-color: {{tag.color}}">{{ tag }}</a>
                                   {% endfor %}
                             </div>
 

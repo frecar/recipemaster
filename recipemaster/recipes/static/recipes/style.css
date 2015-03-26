@@ -23,7 +23,7 @@
     border-bottom: 2px dashed silver;
     padding-bottom: 0.3em;
 }
-.recipe-list li a {
+.recipe-list li>a {
     color: #444444;
     font-size: 2em;
 }
