@@ -8,7 +8,7 @@
                         <li>
                             <a href="{{ recipe.url }}">{{ recipe.title }}</a>
 
-                            <div class="tags">
+                            <div class="tags" style="float: right;">
                                 {% for tag in recipe.tags.all %}
                                 <span class="label label-default" style="background-color: {{tag.color}}">{{ tag }}</span>
                                   {% endfor %}
