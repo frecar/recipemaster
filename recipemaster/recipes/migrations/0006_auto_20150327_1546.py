@@ -3,13 +3,15 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import autoslug.fields
-from recipemaster.recipes.models import Tag
 
 
-def save_all_tags():
+
+
+def save_all_tags(apps, schema_editor):
     """
     Save all tags to create slugs with autoslugfield
     """
+    Tag = apps.get_model('recipes', 'Tag')
     for tag in Tag.objects.all():
         tag.save()
 
