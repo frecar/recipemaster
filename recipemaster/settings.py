@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.contrib import messages
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -36,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'bootstrap3',
 
     'recipemaster.recipes',
 )
@@ -88,7 +92,13 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'recipemaster/templates'),
 )
 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'  # Makes messages play nice with bootstrap 3
+}
+
+
 try:
     from recipemaster.instance_settings import *  # noqa
 except ImportError:
     pass
+
