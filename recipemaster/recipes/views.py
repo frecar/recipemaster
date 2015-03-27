@@ -9,8 +9,8 @@ def index(request):
     return render(request, 'recipes/index.html', context)
 
 
-def tag_filter(request, tag_id):
-    tag = get_object_or_404(Tag, pk=tag_id)
+def tag_filter(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
     recipes = Recipe.objects.filter(tags=tag).order_by('id')
     context = {'recipes': recipes}
     return render(request, 'recipes/index.html', context)

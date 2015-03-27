@@ -1,11 +1,13 @@
 from django.conf import settings
 from django.db import models
 from colorfield.fields import ColorField
+from autoslug import AutoSlugField
 
 
 class Tag(models.Model):
     title = models.CharField(max_length=255)
     color = ColorField()
+    slug = AutoSlugField(populate_from='title')
 
     def __str__(self):
         return self.title
