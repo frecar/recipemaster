@@ -101,4 +101,3 @@ try:
     from recipemaster.instance_settings import *  # noqa
 except ImportError:
     pass
-

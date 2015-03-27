@@ -28,8 +28,3 @@ def add_recipe(request):
     return render(request, 'recipes/add_recipe.html', {
         'form': form
     })
-
-
-
-
-
