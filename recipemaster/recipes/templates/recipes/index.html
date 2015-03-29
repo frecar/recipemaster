@@ -6,13 +6,16 @@
                 <ul class="recipe-list list-unstyled">
                     {% for recipe in recipes %}
                         <li>
-                            <a href="{{ recipe.url }}">{{ recipe.title }}</a>
+                            <a href="{{ recipe.url }}" class="title">{{ recipe.title }}</a>
 
                             <div class="tags" style="float: right;">
                                 {% for tag in recipe.tags.all %}
                                     <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default" style="background-color: {{tag.color}}">{{ tag }}</a>
                                   {% endfor %}
                             </div>
+                            {% if user.is_staff %}
+                                <a href="{% url 'recipes:edit' recipe.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            {% endif %}
 
                         </li>
                     {% endfor %}

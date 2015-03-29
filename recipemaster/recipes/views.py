@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404, redirect
 from recipemaster.recipes.forms import RecipeForm
 from recipemaster.recipes.models import Recipe, Tag
@@ -17,14 +18,18 @@ def tag_filter(request, slug):
     return render(request, 'recipes/index.html', context)
 
 
-def add_recipe(request):
-    form = RecipeForm()
+@staff_member_required
+def edit_recipe(request, recipe_id=None):
+    recipe = Recipe()
+    if recipe_id:
+        recipe = get_object_or_404(Recipe, pk=recipe_id)
+    form = RecipeForm(instance=recipe)
     if request.POST:
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
-            messages.success(request, "Added recipe")
+            messages.success(request, 'Saved recipe')
             return redirect('recipes:index')
-    return render(request, 'recipes/add_recipe.html', {
+    return render(request, 'recipes/edit_recipe.html', {
         'form': form
     })

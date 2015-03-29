@@ -7,6 +7,6 @@ class RecipeForm(ModelForm):
         model = Recipe
         fields = ['title', 'url', 'tags']
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['tags'].help_text = None

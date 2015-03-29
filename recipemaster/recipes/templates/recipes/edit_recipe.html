@@ -3,8 +3,11 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h2>Add recipe</h2>
-
+            {% if form.instance.pk %}
+                <h2>Edit recipe</h2>
+            {% else %}
+                <h2>Add recipe</h2>
+            {% endif %}
             <form method="post">
                 {% csrf_token %}
                 {% bootstrap_form form %}
