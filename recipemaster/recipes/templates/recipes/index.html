@@ -10,11 +10,25 @@
 
                             <div class="tags" style="float: right;">
                                 {% for tag in recipe.tags.all %}
-                                    <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default" style="background-color: {{tag.color}}">{{ tag }}</a>
-                                  {% endfor %}
+                                    <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default"
+                                       style="background-color: {{ tag.color }}">{{ tag }}</a>
+                                {% endfor %}
                             </div>
                             {% if user.is_staff %}
-                                <a href="{% url 'recipes:edit' recipe.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <div class="admin-buttons">
+                                    <a href="{% url 'recipes:edit' recipe.id %}"><span
+                                            class="glyphicon glyphicon-pencil"></span></a>
+
+                                    <form id="delete-{{ recipe.pk }}" action="{% url 'recipes:delete' recipe.id %}"
+                                          method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delete" value="yes"/>
+                                        <a href="javascript:;"
+                                           onclick="document.getElementById('delete-{{ recipe.pk }}').submit();">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </form>
+                                </div>
                             {% endif %}
 
                         </li>

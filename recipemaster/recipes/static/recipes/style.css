@@ -28,7 +28,21 @@
     font-size: 2em;
 }
 
+.recipe-list li form {
+    display: inline-block;
 
+}
+
+.recipe-list .admin-buttons {
+    display: inline-block;
+    margin-left: 3px;
+
+}
+
+.recipe-list .admin-buttons a {
+    margin-left: 3px;
+     color: #444444;
+}
 
 
 

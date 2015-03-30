@@ -33,3 +33,15 @@ def edit_recipe(request, recipe_id=None):
     return render(request, 'recipes/edit_recipe.html', {
         'form': form
     })
+
+
+@staff_member_required
+def delete_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    if request.POST:
+        if request.POST.get('delete') == 'yes':
+            recipe.delete()
+            messages.success(request, 'Deleted recipe')
+        else:
+            messages.error(request, 'Could not delete recipe. Try again. ')
+    return redirect('recipes:index')
