@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from recipemaster.recipes.models import Recipe
+from recipemaster.recipes.models import Recipe, RecipeCollection
 
 
 class RecipeForm(ModelForm):
@@ -10,3 +10,13 @@ class RecipeForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['tags'].help_text = None
+
+
+class CollectionForm(ModelForm):
+    class Meta:
+        model = RecipeCollection
+        fields = ['title', 'recipes']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['recipes'].help_text = None
