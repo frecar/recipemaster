@@ -9,4 +9,5 @@ urlpatterns = patterns(
 
     url(r'^recipes/', include('recipemaster.recipes.urls', namespace='recipes')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/', include('recipemaster.api.urls'))
 )
