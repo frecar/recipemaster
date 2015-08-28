@@ -44,6 +44,17 @@
      color: #444444;
 }
 
+.head-field {
+  margin-bottom: 35px;
+  margin-top: 10px;
+  margin-left: -6px;
+
+}
+
+.col-md-11{
+    padding-top: 8px;
+}
+
 .btn-circle.btn-lg {
   width: 50px;
   height: 50px;
@@ -51,14 +62,16 @@
   font-size: 18px;
   line-height: 1.33;
   border-radius: 25px;
-  margin-bottom: 15px;
-  margin-top: 10px;
+
 }
 
 .glyphicon.glyphicon-plus{
     color: #444444;
     padding-top: 3.2px;
 }
+
+
+
 
 
 
