@@ -17,6 +17,7 @@ class Recipe(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
     tags = models.ManyToManyField(Tag, related_name='recipes')
+    creation_date = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return self.title

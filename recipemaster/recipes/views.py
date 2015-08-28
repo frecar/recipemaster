@@ -47,6 +47,7 @@ def delete_recipe(request, recipe_id):
     return redirect('recipes:index')
 
 
+@staff_member_required
 def edit_collection(request, collection_id=None):
     collection = RecipeCollection()
     if collection_id:
