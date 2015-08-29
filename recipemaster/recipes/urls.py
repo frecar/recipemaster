@@ -18,4 +18,5 @@ urlpatterns = patterns(
         views.edit_collection,
         name='edit_collection'
     ),
+    url(r'^collections/(?P<collection_id>\d+)/$', views.view_collection, name='view_collection'),
 )

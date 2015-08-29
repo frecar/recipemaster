@@ -51,14 +51,20 @@ def delete_recipe(request, recipe_id):
 def edit_collection(request, collection_id=None):
     collection = RecipeCollection()
     if collection_id:
-        collection = get_object_or_404(RecipeCollection, pk=collection_id)
+        collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     form = CollectionForm(instance=collection)
     if request.POST:
         form = CollectionForm(request.POST, instance=collection)
         if form.is_valid():
-            form.save()
+            collection = form.save()
+            collection.users.add(request.user)
             messages.success(request, 'Saved collection')
-            return redirect('recipes:index')
+            return redirect('recipes:view_collection', collection_id=collection.pk)
     return render(request, 'recipes/edit_collection.html', {
         'form': form
     })
+
+
+def view_collection(request, collection_id):
+    collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    return render(request, 'recipes/view_collection.html', {'collection': collection})
