@@ -21,7 +21,7 @@
                                     <a href="{% url 'recipes:edit' recipe.id %}"><span
                                             class="glyphicon glyphicon-pencil"></span></a>
 
-                                    <form id="delete-{{ recipe.pk }}" action="{% url 'recipes:delete' recipe.id %}"
+                                    <form id="delete-{{ recipe.pk }}" action="{% url 'recipes:remove_recipe_from_collection' collection.id recipe.id %}"
                                           method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="delete" value="yes"/>

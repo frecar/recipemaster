@@ -68,3 +68,15 @@ def edit_collection(request, collection_id=None):
 def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     return render(request, 'recipes/view_collection.html', {'collection': collection})
+
+
+def remove_recipe_from_collection(request, collection_id, recipe_id):
+    collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    if request.POST:
+        if request.POST.get('delete') == 'yes':
+            collection.recipes.remove(recipe)
+            messages.success(request, 'Removed recipe from {}'.format(collection.title))
+        else:
+            messages.error(request, 'Could not delete recipe. Try again. ')
+    return redirect('recipes:view_collection', collection_id=collection.pk)
