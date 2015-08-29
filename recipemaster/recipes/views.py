@@ -6,8 +6,8 @@ from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 
 
 def index(request):
-    recipes = Recipe.objects.order_by('-id')
-    context = {'recipes': recipes}
+    collections = RecipeCollection.objects.order_by('title')
+    context = {'collection': collections}
     return render(request, 'recipes/index.html', context)
 
 
@@ -22,7 +22,7 @@ def tag_filter(request, slug):
 def edit_recipe(request, recipe_id=None):
     recipe = Recipe()
     if recipe_id:
-        recipe = get_object_or_404(Recipe, pk=recipe_id)
+        recipe = get_object_or_404(Recipe, pk=recipe_id, collections__users=request.user)
     form = RecipeForm(instance=recipe)
     if request.POST:
         form = RecipeForm(request.POST, instance=recipe)
@@ -65,6 +65,17 @@ def edit_collection(request, collection_id=None):
     })
 
 
+def delete_collection(request, collection_id):
+    collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    if request.POST:
+        if request.POST.get('delete') == 'yes':
+            collection.delete()
+            messages.success(request, 'Deleted collection')
+        else:
+            messages.error(request, 'Could not delete collection. Try again. ')
+    return redirect('recipes:index')
+
+
 def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     return render(request, 'recipes/view_collection.html', {'collection': collection})
@@ -80,3 +91,5 @@ def remove_recipe_from_collection(request, collection_id, recipe_id):
         else:
             messages.error(request, 'Could not delete recipe. Try again. ')
     return redirect('recipes:view_collection', collection_id=collection.pk)
+
+

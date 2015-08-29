@@ -2,41 +2,23 @@
 {% block content %}
     <div class="row" xmlns="http://www.w3.org/1999/html">
         <div class="col-md-6 col-md-offset-3">
-            <div class="head-field">
-                <div class="row">
-                    <div class="col-md-1">
-                        <a href="{% url 'recipes:add' %}" class="btn btn-default">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </a>
-                    </div>
-                    <div class="col-md-11">
-                        <input type="text" class="form-control" placeholder="Search for recipes...">
-                    </div>
-                </div>
-            </div>
-            {% if recipes %}
+        <h2>My collections</h2>
+            {% if collestions %}
                 <ul class="recipe-list list-unstyled">
-                    {% for recipe in recipes %}
+                    {% for collection in collections %}
                         <li>
-                            <a href="{{ recipe.url }}" class="title">{{ recipe.title }}</a>
-
-                            <div class="tags" style="float: right;">
-                                {% for tag in recipe.tags.all %}
-                                    <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default"
-                                       style="background-color: {{ tag.color }}">{{ tag }}</a>
-                                {% endfor %}
-                            </div>
+                            <a href="{% url 'recipes:view_collection' collection.id %}" class="title">{{ collection.title }}</a>
                             {% if user.is_staff %}
                                 <div class="admin-buttons">
-                                    <a href="{% url 'recipes:edit' recipe.id %}"><span
+                                    <a href="{% url 'recipes:edit_collection' collection.id %}"><span
                                             class="glyphicon glyphicon-pencil"></span></a>
 
-                                    <form id="delete-{{ recipe.pk }}" action="{% url 'recipes:delete' recipe.id %}"
+                                    <form id="delete-{{ collection.pk }}" action="{% url 'recipes:delete_collection' collection.id %}"
                                           method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="delete" value="yes"/>
                                         <a href="javascript:;"
-                                           onclick="document.getElementById('delete-{{ recipe.pk }}').submit();">
+                                           onclick="document.getElementById('delete-{{ collection.pk }}').submit();">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                     </form>
@@ -47,7 +29,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No recipes available</p>
+                <p>There are currently no collections here. Create one here.</p>
             {% endif %}
         </div>
 
