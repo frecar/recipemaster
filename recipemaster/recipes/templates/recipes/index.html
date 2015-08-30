@@ -2,7 +2,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-        <h2>My collections</h2>
+        <h2>My collections <a href="{% url 'recipes:add_collection' %}"><span class="glyphicon glyphicon-plus"></span></a></h2>
             {% if collections %}
                 <ul class="recipe-list list-unstyled">
                     {% for collection in collections %}
