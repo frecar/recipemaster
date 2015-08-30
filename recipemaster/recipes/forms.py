@@ -16,4 +16,3 @@ class CollectionForm(ModelForm):
     class Meta:
         model = RecipeCollection
         fields = ['title']
-

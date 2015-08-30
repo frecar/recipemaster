@@ -13,22 +13,29 @@ urlpatterns = patterns(
     url(r'^(?P<recipe_id>\d+)/edit/$', views.edit_recipe, name='edit'),
     url(r'^(?P<recipe_id>\d+)/delete/$', views.delete_recipe, name='delete'),
     url(r'^collections/add/$', views.edit_collection, name='add_collection'),
-    url(r'^collections/(?P<collection_id>\d+)/delete/$', views.delete_collection, name='delete_collection'),
+    url(
+        r'^collections/(?P<collection_id>\d+)/delete/$',
+        views.delete_collection,
+        name='delete_collection'
+    ),
     url(
         r'^collections/(?P<collection_id>\d+)/edit/$',
         views.edit_collection,
         name='edit_collection'
     ),
     url(r'^collections/(?P<collection_id>\d+)/$', views.view_collection, name='view_collection'),
-    url(r'^collections/(?P<collection_id>\d+)/remove/(?P<recipe_id>\d+)/$',
+    url(
+        r'^collections/(?P<collection_id>\d+)/remove/(?P<recipe_id>\d+)/$',
         views.remove_recipe_from_collection,
         name='remove_recipe_from_collection'
     ),
-    url(r'^collections/(?P<collection_id>\d+)/add/(?P<recipe_id>\d+)/$',
+    url(
+        r'^collections/(?P<collection_id>\d+)/add/(?P<recipe_id>\d+)/$',
         views.edit_recipe_in_collection,
         name='edit_recipe_in_collection'
     ),
-    url(r'^collections/(?P<collection_id>\d+)/add/$',
+    url(
+        r'^collections/(?P<collection_id>\d+)/add/$',
         views.edit_recipe_in_collection,
         name='add_recipe_to_collection'
     ),

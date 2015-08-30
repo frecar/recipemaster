@@ -1,6 +1,6 @@
 tasks:
-  - tox
-  - flake8
+  - tox -e tests
+  - tox -e flake8
   - coverage report
   - coverage xml
 
