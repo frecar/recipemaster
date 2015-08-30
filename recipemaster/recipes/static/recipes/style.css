@@ -10,6 +10,10 @@
     margin-bottom: 2px;
 
 }
+h1 a, h1 a:hover {
+    color: #444444;
+}
+
 .header .lead {
     padding-left: 40px;
     font-size: 1.5em;
