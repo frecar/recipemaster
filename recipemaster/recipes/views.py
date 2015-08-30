@@ -105,7 +105,7 @@ def edit_recipe_in_collection(request, collection_id, recipe_id=None):
             recipe = form.save()
             collection.recipes.add(recipe)
             messages.success(request, 'Saved recipe')
-            return redirect('recipes:view_collection')
+            return redirect('recipes:view_collection', collection_id=collection.pk)
     return render(request, 'recipes/edit_recipe.html', {
         'form': form
     })
