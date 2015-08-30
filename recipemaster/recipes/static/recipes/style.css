@@ -5,11 +5,13 @@
     background-position: center 30%;
     background-repeat: no-repeat;
 }
+
 .header h1 {
     font-size: 3.5em;
     margin-bottom: 2px;
 
 }
+
 h1 a, h1 a:hover {
     color: #444444;
 }
@@ -19,14 +21,17 @@ h1 a, h1 a:hover {
     font-size: 1.5em;
     color: black;
 }
+
 .content {
     margin-top: 1em;
 }
+
 .recipe-list li {
     margin-top: 1.0em;
     border-bottom: 2px dashed silver;
     padding-bottom: 0.3em;
 }
+
 .recipe-list li a.title {
     color: #444444;
     font-size: 2em;
@@ -45,26 +50,39 @@ h1 a, h1 a:hover {
 
 .recipe-list .admin-buttons a {
     margin-left: 3px;
-     color: #444444;
+    color: #444444;
 }
 
 .head-field {
-  margin-bottom: 35px;
-  margin-top: 10px;
+    margin-bottom: 35px;
+    margin-top: 10px;
 
 }
 
-.col-md-11{
+.col-md-11 {
     padding-top: 2px;
 }
 
-.glyphicon.glyphicon-plus{
+.glyphicon.glyphicon-plus {
     color: #444444;
 }
 
-h2 .glyphicon.glyphicon-plus{
-    color: #444444;
+h2 .glyphicon.glyphicon-plus {
+
     font-size: 0.8em;
+}
+
+.footer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #444444;
+    font-size: 1.5em;
+
+}
+
+.footer a {
+    color: #444444;
+
 }
 
 

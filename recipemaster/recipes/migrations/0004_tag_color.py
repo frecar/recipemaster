@@ -6,7 +6,6 @@ import colorfield.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('recipes', '0003_auto_20150325_2130'),
     ]

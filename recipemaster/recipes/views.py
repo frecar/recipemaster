@@ -1,10 +1,12 @@
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from recipemaster.recipes.forms import RecipeForm, CollectionForm
 from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 
 
+@login_required
 def index(request):
     collections = RecipeCollection.objects.all().order_by('title')
     context = {'collections': collections}
@@ -47,7 +49,7 @@ def delete_recipe(request, recipe_id):
     return redirect('recipes:index')
 
 
-@staff_member_required
+@login_required
 def edit_collection(request, collection_id=None):
     collection = RecipeCollection()
     if collection_id:
@@ -65,6 +67,7 @@ def edit_collection(request, collection_id=None):
     })
 
 
+@login_required
 def delete_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     if request.POST:
@@ -76,11 +79,13 @@ def delete_collection(request, collection_id):
     return redirect('recipes:index')
 
 
+@login_required
 def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     return render(request, 'recipes/view_collection.html', {'collection': collection})
 
 
+@login_required
 def remove_recipe_from_collection(request, collection_id, recipe_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     recipe = get_object_or_404(Recipe, pk=recipe_id)
@@ -93,6 +98,7 @@ def remove_recipe_from_collection(request, collection_id, recipe_id):
     return redirect('recipes:view_collection', collection_id=collection.pk)
 
 
+@login_required
 def edit_recipe_in_collection(request, collection_id, recipe_id=None):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     recipe = Recipe()

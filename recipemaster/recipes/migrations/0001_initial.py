@@ -6,7 +6,6 @@ from django.conf import settings
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
@@ -16,7 +15,7 @@ class Migration(migrations.Migration):
             name='Recipe',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True,
-                 auto_created=True)),
+                                        auto_created=True)),
                 ('url', models.URLField()),
                 ('title', models.CharField(max_length=255)),
             ],
@@ -28,9 +27,9 @@ class Migration(migrations.Migration):
             name='RecipeCollection',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True,
-                 auto_created=True)),
+                                        auto_created=True)),
                 ('recipes', models.ManyToManyField(related_name='collections',
-                 to='recipes.Recipe')),
+                                                   to='recipes.Recipe')),
                 ('users', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
             options={

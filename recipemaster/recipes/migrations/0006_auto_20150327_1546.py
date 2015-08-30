@@ -5,8 +5,6 @@ from django.db import models, migrations
 import autoslug.fields
 
 
-
-
 def save_all_tags(apps, schema_editor):
     """
     Save all tags to create slugs with autoslugfield
@@ -17,7 +15,6 @@ def save_all_tags(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('recipes', '0005_tag_slug'),
     ]

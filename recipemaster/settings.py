@@ -97,7 +97,6 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'  # Makes messages play nice with bootstrap 3
 }
 
-
 try:
     from recipemaster.instance_settings import *  # noqa
 except ImportError:

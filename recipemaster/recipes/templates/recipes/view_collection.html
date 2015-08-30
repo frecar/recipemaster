@@ -2,45 +2,48 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-        <h2>{{ collection.title }} <a href="{% url 'recipes:add_recipe_to_collection' collection.id%}"><span class="glyphicon glyphicon-plus"></span></a> </h2>
+            <h2>{{ collection.title }} <a href="{% url 'recipes:add_recipe_to_collection' collection.id %}"><span
+                    class="glyphicon glyphicon-plus"></span></a></h2>
 
-        {% with collection.recipes.all as recipes %}
-            {% if recipes %}
-                <ul class="recipe-list list-unstyled">
-                    {% for recipe in recipes %}
-                        <li>
-                            <a href="{{ recipe.url }}" class="title">{{ recipe.title }}</a>
+            {% with collection.recipes.all as recipes %}
+                {% if recipes %}
+                    <ul class="recipe-list list-unstyled">
+                        {% for recipe in recipes %}
+                            <li>
+                                <a href="{{ recipe.url }}" class="title">{{ recipe.title }}</a>
 
-                            <div class="tags" style="float: right;">
-                                {% for tag in recipe.tags.all %}
-                                    <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default"
-                                       style="background-color: {{ tag.color }}">{{ tag }}</a>
-                                {% endfor %}
-                            </div>
-                            {% if user.is_staff %}
-                                <div class="admin-buttons">
-                                    <a href="{% url 'recipes:edit' recipe.id %}"><span
-                                            class="glyphicon glyphicon-pencil"></span></a>
-
-                                    <form id="delete-{{ recipe.pk }}" action="{% url 'recipes:remove_recipe_from_collection' collection.id recipe.id %}"
-                                          method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="delete" value="yes"/>
-                                        <a href="javascript:;"
-                                           onclick="document.getElementById('delete-{{ recipe.pk }}').submit();">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </form>
+                                <div class="tags" style="float: right;">
+                                    {% for tag in recipe.tags.all %}
+                                        <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default"
+                                           style="background-color: {{ tag.color }}">{{ tag }}</a>
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
+                                {% if user.is_staff %}
+                                    <div class="admin-buttons">
+                                        <a href="{% url 'recipes:edit' recipe.id %}"><span
+                                                class="glyphicon glyphicon-pencil"></span></a>
 
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>There are no recipes yet. Create one <a href="{% url "recipes:add_recipe_to_collection" collection.id %}">here</a>.</p>
-            {% endif %}
-        {% endwith %}
+                                        <form id="delete-{{ recipe.pk }}"
+                                              action="{% url 'recipes:remove_recipe_from_collection' collection.id recipe.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="delete" value="yes"/>
+                                            <a href="javascript:;"
+                                               onclick="document.getElementById('delete-{{ recipe.pk }}').submit();">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </form>
+                                    </div>
+                                {% endif %}
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>There are no recipes yet. Create one <a
+                            href="{% url "recipes:add_recipe_to_collection" collection.id %}">here</a>.</p>
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 {% endblock %}
