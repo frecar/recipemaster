@@ -37,7 +37,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No recipes available</p>
+                <p>There are no recipes yet. Create one <a href="{% url "recipes:add_recipe_to_collection" collection.id %}">here</a>.</p>
             {% endif %}
         {% endwith %}
         </div>

@@ -93,3 +93,19 @@ def remove_recipe_from_collection(request, collection_id, recipe_id):
     return redirect('recipes:view_collection', collection_id=collection.pk)
 
 
+def edit_recipe_in_collection(request, collection_id, recipe_id=None):
+    collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    recipe = Recipe()
+    if recipe_id:
+        recipe = get_object_or_404(Recipe, pk=recipe_id)
+    form = RecipeForm(instance=recipe)
+    if request.POST:
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid():
+            recipe = form.save()
+            collection.recipes.add(recipe)
+            messages.success(request, 'Saved recipe')
+            return redirect('recipes:view_collection')
+    return render(request, 'recipes/edit_recipe.html', {
+        'form': form
+    })

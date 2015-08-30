@@ -24,4 +24,12 @@ urlpatterns = patterns(
         views.remove_recipe_from_collection,
         name='remove_recipe_from_collection'
     ),
+    url(r'^collections/(?P<collection_id>\d+)/add/(?P<recipe_id>\d+)/$',
+        views.edit_recipe_in_collection,
+        name='edit_recipe_in_collection'
+    ),
+    url(r'^collections/(?P<collection_id>\d+)/add/$',
+        views.edit_recipe_in_collection,
+        name='add_recipe_to_collection'
+    ),
 )
