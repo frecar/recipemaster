@@ -15,8 +15,5 @@ class RecipeForm(ModelForm):
 class CollectionForm(ModelForm):
     class Meta:
         model = RecipeCollection
-        fields = ['title', 'recipes']
+        fields = ['title']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['recipes'].help_text = None
