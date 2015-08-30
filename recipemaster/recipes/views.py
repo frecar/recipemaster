@@ -6,8 +6,8 @@ from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 
 
 def index(request):
-    collections = RecipeCollection.objects.order_by('title')
-    context = {'collection': collections}
+    collections = RecipeCollection.objects.all().order_by('title')
+    context = {'collections': collections}
     return render(request, 'recipes/index.html', context)
 
 

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
         <div class="col-md-6 col-md-offset-3">
         <h2>My collections</h2>
-            {% if collestions %}
+            {% if collections %}
                 <ul class="recipe-list list-unstyled">
                     {% for collection in collections %}
                         <li>
@@ -29,7 +29,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>There are currently no collections here. Create one here.</p>
+                <p>There are no collections yet. Create one <a href="{% url 'recipes:add_collection' %}">here</a>.</p>
             {% endif %}
         </div>
 
