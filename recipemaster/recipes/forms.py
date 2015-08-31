@@ -25,4 +25,3 @@ class SignUpForm(UserCreationForm):
         super(SignUpForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = None
         self.fields['password2'].help_text = None
-
