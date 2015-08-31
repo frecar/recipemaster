@@ -20,7 +20,7 @@
                                 </div>
                                 {% if user.is_staff %}
                                     <div class="admin-buttons">
-                                        <a href="{% url 'recipes:edit' recipe.id %}"><span
+                                        <a href="{% url 'recipes:edit_recipe_in_collection' collection.id recipe.id %}"><span
                                                 class="glyphicon glyphicon-pencil"></span></a>
 
                                         <form id="delete-{{ recipe.pk }}"
