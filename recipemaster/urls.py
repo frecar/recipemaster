@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, CreateView
+from recipemaster.recipes.forms import SignUpForm
 
 
 urlpatterns = patterns(
@@ -13,4 +14,5 @@ urlpatterns = patterns(
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url('^accounts/register/', 'recipemaster.views.registration', name='registration'),
 )

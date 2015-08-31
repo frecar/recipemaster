@@ -15,13 +15,13 @@
                                     <a href="{% url 'recipes:edit_collection' collection.id %}"><span
                                             class="glyphicon glyphicon-pencil"></span></a>
 
-                                    <form id="delete-{{ collection.pk }}"
+                                    <form id="delete-{{ collection.id }}"
                                           action="{% url 'recipes:delete_collection' collection.id %}"
                                           method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="delete" value="yes"/>
                                         <a href="javascript:;"
-                                           onclick="document.getElementById('delete-{{ collection.pk }}').submit();">
+                                           onclick="document.getElementById('delete-{{ collection.id }}').submit();">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                     </form>

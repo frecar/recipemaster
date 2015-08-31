@@ -9,8 +9,7 @@ from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 @login_required
 def index(request):
     collections = RecipeCollection.objects.filter(users=request.user).order_by('title')
-    context = {'collections': collections}
-    return render(request, 'recipes/index.html', context)
+    return render(request, 'recipes/index.html', {'collections': collections})
 
 
 def tag_filter(request, slug):

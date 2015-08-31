@@ -76,7 +76,7 @@ h2 .glyphicon.glyphicon-plus {
     margin-top: 30px;
     margin-bottom: 30px;
     color: #444444;
-    font-size: 1.5em;
+    font-size: 1.2em;
 
 }
 
@@ -85,6 +85,18 @@ h2 .glyphicon.glyphicon-plus {
 
 }
 
+.signup {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #444444;
+    font-size: 1.2em;
+
+}
+
+.signup a {
+    color: #444444;
+
+}
 
 
 
