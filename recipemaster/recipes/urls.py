@@ -30,7 +30,7 @@ urlpatterns = patterns(
         name='remove_recipe_from_collection'
     ),
     url(
-        r'^collections/(?P<collection_id>\d+)/add/(?P<recipe_id>\d+)/$',
+        r'^collections/(?P<collection_id>\d+)/edit/(?P<recipe_id>\d+)/$',
         views.edit_recipe_in_collection,
         name='edit_recipe_in_collection'
     ),
