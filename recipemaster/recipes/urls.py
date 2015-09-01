@@ -39,4 +39,9 @@ urlpatterns = patterns(
         views.edit_recipe_in_collection,
         name='add_recipe_to_collection'
     ),
+    url(
+        r'^collections/(?P<collection_id>\d+)/add_user/$',
+        views.add_user_to_collection,
+        name='add_user_to_collection'
+    ),
 )

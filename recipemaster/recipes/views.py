@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from recipemaster.recipes.forms import RecipeForm, CollectionForm
 from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
+from .forms import AddUserForm
 
 
 @login_required
@@ -114,3 +116,20 @@ def edit_recipe_in_collection(request, collection_id, recipe_id=None):
     return render(request, 'recipes/edit_recipe.html', {
         'form': form
     })
+
+
+@login_required
+def add_user_to_collection(request, collection_id):
+    collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    form = AddUserForm()
+    if request.POST:
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            user = User.objects.get(username=form.cleaned_data['username'])
+            collection.users.add(user)
+            messages.success(request, 'User added to collection')
+            return redirect('recipes:view_collection', collection_id=collection.pk)
+        else:
+            messages.error(request, 'Could not add user. Please try again.')
+    return render(request, 'recipes/add_user_to_collection.html', {
+        'form': form})

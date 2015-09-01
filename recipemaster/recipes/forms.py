@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from recipemaster.recipes.models import Recipe, RecipeCollection
+from django import forms
 
 
 class RecipeForm(ModelForm):
@@ -25,3 +26,7 @@ class SignUpForm(UserCreationForm):
         super(SignUpForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = None
         self.fields['password2'].help_text = None
+
+
+class AddUserForm(forms.Form):
+    username = forms.CharField(label='Username', max_length=100)
