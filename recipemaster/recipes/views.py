@@ -132,4 +132,4 @@ def add_user_to_collection(request, collection_id):
         else:
             messages.error(request, 'Could not add user. Please try again.')
     return render(request, 'recipes/add_user_to_collection.html', {
-        'form': form})
+        'form': form, 'collection': collection})
