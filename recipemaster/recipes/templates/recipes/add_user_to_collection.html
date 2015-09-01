@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h2>Add user to: {{ collection.title }}</h2>
+            <h2>Add user to {{ collection.title }}</h2>
             <form method="post">
                 {% csrf_token %}
                 {% bootstrap_form form %}
