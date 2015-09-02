@@ -14,11 +14,14 @@ def index(request):
     return render(request, 'recipes/index.html', {'collections': collections})
 
 
-def tag_filter(request, slug):
+def tag_filter(request, collection_id, slug):
+    collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     tag = get_object_or_404(Tag, slug=slug)
-    recipes = Recipe.objects.filter(tags=tag).order_by('id')
-    context = {'recipes': recipes}
-    return render(request, 'recipes/index.html', context)
+    recipes = collection.recipes.filter(tags=tag).order_by('id')
+    return render(request, 'recipes/view_collection.html', {
+        'collection': collection,
+        'recipes': recipes
+    })
 
 
 @staff_member_required
@@ -83,7 +86,10 @@ def delete_collection(request, collection_id):
 @login_required
 def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
-    return render(request, 'recipes/view_collection.html', {'collection': collection})
+    return render(request, 'recipes/view_collection.html', {
+        'collection': collection,
+        'recipes': collection.recipes.all()
+    })
 
 
 @login_required

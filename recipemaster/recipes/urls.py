@@ -7,7 +7,6 @@ from recipemaster.recipes import views
 urlpatterns = patterns(
     '',
     url(r'^$', views.index, name='index'),
-    url(r'^by-tag/(?P<slug>[\w-]+)/$', views.tag_filter, name='tag_filter'),
     url(r'^feed/$', LatestRecipes()),
     url(r'^add/$', views.edit_recipe, name='add'),
     url(r'^(?P<recipe_id>\d+)/edit/$', views.edit_recipe, name='edit'),
@@ -17,6 +16,11 @@ urlpatterns = patterns(
         r'^collections/(?P<collection_id>\d+)/delete/$',
         views.delete_collection,
         name='delete_collection'
+    ),
+    url(
+        r'^collections/(?P<collection_id>\d+)/by-tag/(?P<slug>[\w-]+)/$',
+        views.tag_filter,
+        name='tag_filter'
     ),
     url(
         r'^collections/(?P<collection_id>\d+)/edit/$',

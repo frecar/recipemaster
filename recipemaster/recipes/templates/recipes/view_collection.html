@@ -5,7 +5,6 @@
             <h2>{{ collection.title }} <a href="{% url 'recipes:add_recipe_to_collection' collection.id %}"><span
                     class="glyphicon glyphicon-plus"></span></a></h2>
 
-            {% with collection.recipes.all as recipes %}
                 {% if recipes %}
                     <ul class="recipe-list list-unstyled">
                         {% for recipe in recipes %}
@@ -14,7 +13,7 @@
 
                                 <div class="tags" style="float: right;">
                                     {% for tag in recipe.tags.all %}
-                                        <a href="{% url 'recipes:tag_filter' tag.slug %}" class="label label-default"
+                                        <a href="{% url 'recipes:tag_filter' collection.id tag.slug %}" class="label label-default"
                                            style="background-color: {{ tag.color }}">{{ tag }}</a>
                                     {% endfor %}
                                 </div>
@@ -43,7 +42,6 @@
                     <p>There are no recipes yet. Create one <a
                             href="{% url "recipes:add_recipe_to_collection" collection.id %}">here</a>.</p>
                 {% endif %}
-            {% endwith %}
         </div>
     </div>
 {% endblock %}
