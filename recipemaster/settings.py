@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+ANALYTICS_ID = 'UA-67135589-1'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -53,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'recipemaster.middleware.AnalyticsMiddleware',
 )
 
 ROOT_URLCONF = 'recipemaster.urls'
