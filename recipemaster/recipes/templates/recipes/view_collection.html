@@ -17,7 +17,6 @@
                                            style="background-color: {{ tag.color }}">{{ tag }}</a>
                                     {% endfor %}
                                 </div>
-                                {% if user.is_staff %}
                                     <div class="admin-buttons">
                                         <a href="{% url 'recipes:edit_recipe_in_collection' collection.id recipe.id %}"><span
                                                 class="glyphicon glyphicon-pencil"></span></a>
@@ -33,7 +32,6 @@
                                             </a>
                                         </form>
                                     </div>
-                                {% endif %}
 
                             </li>
                         {% endfor %}
