@@ -1,4 +1,4 @@
-from recipemaster import settings
+from django.conf import settings
 
 
 class AnalyticsMiddleware(object):
