@@ -12,6 +12,8 @@ urlpatterns = patterns(
     url(r'^api/', include('recipemaster.api.urls')),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),
+    url('^accounts/password-reset/', 'recipemaster.views.password_reset', name='password_reset'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url('^accounts/register/', 'recipemaster.views.registration', name='registration'),
+
 )

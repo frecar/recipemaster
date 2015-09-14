@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.forms import PasswordResetForm
 from django.shortcuts import redirect, render
 from recipemaster.recipes.forms import SignUpForm
 from django.contrib import messages
@@ -15,3 +16,16 @@ def registration(request):
         else:
             messages.error(request, 'Could not create user. Please try again.')
     return render(request, 'registration/registration.html', {'form': form})
+
+
+def password_reset(request):
+    form = PasswordResetForm()
+    if request.POST:
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'A code is sent to your email.')
+            return redirect('recipes:index')
+        else:
+            messages.error(request, 'Could not send email. Please try again.')
+    return render(request, 'registration/password_reset.html', {'form': form})
