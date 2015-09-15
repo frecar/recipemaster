@@ -97,6 +97,7 @@ TEMPLATE_DIRS = (
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 SERVER_EMAIL = 'noreply@arya.agnethesoraa.com'
+DEFAULT_FROM_EMAIl = 'noreply@arya.agnethesoraa.com'
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'  # Makes messages play nice with bootstrap 3
