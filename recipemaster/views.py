@@ -23,9 +23,8 @@ def password_reset(request):
     if request.POST:
         form = PasswordResetForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'A code is sent to your email.')
-            return redirect('recipes:index')
+            form.save(request=request)
+            messages.success(request, 'A link to reset the password is sent to your email.')
         else:
             messages.error(request, 'Could not send email. Please try again.')
     return render(request, 'registration/password_reset.html', {'form': form})
