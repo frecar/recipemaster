@@ -12,12 +12,15 @@
                     <button type="submit" class="btn btn-primary">
                         Login
                     </button>
-                        <a class="forgot-password" href="{% url 'recipemaster.views.password_reset' %}"> Forgot password?</a>
-                {% endbuttons %}
             </form>
-             <div class="text-center signup">
-                <p style="font-weight: bold;"><a href="{% url 'registration' %}">Sign up</a></p>
-             </div>
+                    or
+                    <a href="{% url 'recipemaster.views.registration' %}">
+                        <button type="button" class="btn btn-success">
+                        Sign up
+                        </button>
+                    </a>
+                    <a class="forgot-password" href="{% url 'recipemaster.views.password_reset' %}">Forgot password?</a>
+                {% endbuttons %}
         </div>
     </div>
 {% endblock %}
