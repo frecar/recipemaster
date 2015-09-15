@@ -95,8 +95,8 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'recipemaster/templates'),
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SERVER_EMAIL = 'noreply@agnethesoraa.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SERVER_EMAIL = 'noreply@arya.agnethesoraa.com'
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'  # Makes messages play nice with bootstrap 3
