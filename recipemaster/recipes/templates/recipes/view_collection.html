@@ -1,45 +1,54 @@
 {% extends 'base.html' %}
+{% load bootstrap3 %}
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h2>{{ collection.title }} <a href="{% url 'recipes:add_recipe_to_collection' collection.id %}"><span
                     class="glyphicon glyphicon-plus"></span></a></h2>
+            <div>
+                <form method="post" class="search-field">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
 
-                {% if recipes %}
-                    <ul class="recipe-list list-unstyled">
-                        {% for recipe in recipes %}
-                            <li>
-                                <a href="{{ recipe.url }}" class="title">{{ recipe.title }}</a>
+                </form>
+            </div>
 
-                                <div class="tags" style="float: right;">
-                                    {% for tag in recipe.tags.all %}
-                                        <a href="{% url 'recipes:tag_filter' collection.id tag.slug %}" class="label label-default"
-                                           style="background-color: {{ tag.color }}">{{ tag }}</a>
-                                    {% endfor %}
-                                </div>
-                                    <div class="admin-buttons">
-                                        <a href="{% url 'recipes:edit_recipe_in_collection' collection.id recipe.id %}"><span
-                                                class="glyphicon glyphicon-pencil"></span></a>
+            {% if recipes %}
+                <ul class="recipe-list list-unstyled">
+                    {% for recipe in recipes %}
+                        <li>
+                            <a href="{{ recipe.url }}" class="title">{{ recipe.title }}</a>
 
-                                        <form id="delete-{{ recipe.pk }}"
-                                              action="{% url 'recipes:remove_recipe_from_collection' collection.id recipe.id %}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="delete" value="yes"/>
-                                            <a href="javascript:;"
-                                               onclick="document.getElementById('delete-{{ recipe.pk }}').submit();">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </a>
-                                        </form>
-                                    </div>
+                            <div class="tags" style="float: right;">
+                                {% for tag in recipe.tags.all %}
+                                    <a href="{% url 'recipes:tag_filter' collection.id tag.slug %}"
+                                       class="label label-default"
+                                       style="background-color: {{ tag.color }}">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                            <div class="admin-buttons">
+                                <a href="{% url 'recipes:edit_recipe_in_collection' collection.id recipe.id %}"><span
+                                        class="glyphicon glyphicon-pencil"></span></a>
 
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>There are no recipes in this collection. Create one <a
-                            href="{% url "recipes:add_recipe_to_collection" collection.id %}">here</a>.</p>
-                {% endif %}
+                                <form id="delete-{{ recipe.pk }}"
+                                      action="{% url 'recipes:remove_recipe_from_collection' collection.id recipe.id %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete" value="yes"/>
+                                    <a href="javascript:;"
+                                       onclick="document.getElementById('delete-{{ recipe.pk }}').submit();">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </form>
+                            </div>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>There are no recipes in this collection. Create one <a
+                        href="{% url "recipes:add_recipe_to_collection" collection.id %}">here</a>.</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

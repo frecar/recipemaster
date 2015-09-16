@@ -35,3 +35,10 @@ class SignUpForm(UserCreationForm):
 
 class AddUserForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        max_length=100,
+        label='',
+        widget=forms.TextInput(attrs={'placeholder': 'Search for recipes'}))

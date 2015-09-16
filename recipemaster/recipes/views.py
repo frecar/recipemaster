@@ -3,7 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
-from recipemaster.recipes.forms import RecipeForm, CollectionForm
+from recipemaster.recipes.forms import RecipeForm, CollectionForm, SearchForm
 from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 from .forms import AddUserForm
 
@@ -86,8 +86,16 @@ def delete_collection(request, collection_id):
 @login_required
 def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    form = SearchForm()
+    if request.POST:
+        form = SearchForm(request.POST)
+        if form.is_valid:
+            return redirect('recipes:search_results', collection_id=collection.pk)
+        else:
+            messages.error(request, 'Could not search. Please try again.')
     return render(request, 'recipes/view_collection.html', {
         'collection': collection,
+        'form': form,
         'recipes': collection.recipes.all()
     })
 
@@ -139,3 +147,8 @@ def add_user_to_collection(request, collection_id):
             messages.error(request, 'Could not add user. Please try again.')
     return render(request, 'recipes/add_user_to_collection.html', {
         'form': form, 'collection': collection})
+
+
+@login_required
+def search_results(request, collection_id):
+    return render(request, 'recipes/search_list_view.html')
