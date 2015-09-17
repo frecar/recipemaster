@@ -92,10 +92,10 @@ def view_collection(request, collection_id):
         form = SearchForm(request.POST)
         if form.is_valid:
             return render(request, 'recipes/search_list_view.html', {
-        'collection': collection,
-        'form': form,
-        'recipes': recipes
-    })
+                'collection': collection,
+                'form': form,
+                'recipes': recipes
+            })
         else:
             messages.error(request, 'Could not search. Please try again.')
     return render(request, 'recipes/view_collection.html', {
@@ -152,4 +152,3 @@ def add_user_to_collection(request, collection_id):
             messages.error(request, 'Could not add user. Please try again.')
     return render(request, 'recipes/add_user_to_collection.html', {
         'form': form, 'collection': collection})
-
