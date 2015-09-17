@@ -86,17 +86,22 @@ def delete_collection(request, collection_id):
 @login_required
 def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
+    recipes = collection.recipes.all()
     form = SearchForm()
     if request.POST:
         form = SearchForm(request.POST)
         if form.is_valid:
-            return redirect('recipes:search_results', collection_id=collection.pk)
+            return render(request, 'recipes/search_list_view.html', {
+        'collection': collection,
+        'form': form,
+        'recipes': recipes
+    })
         else:
             messages.error(request, 'Could not search. Please try again.')
     return render(request, 'recipes/view_collection.html', {
         'collection': collection,
         'form': form,
-        'recipes': collection.recipes.all()
+        'recipes': recipes
     })
 
 
@@ -148,7 +153,3 @@ def add_user_to_collection(request, collection_id):
     return render(request, 'recipes/add_user_to_collection.html', {
         'form': form, 'collection': collection})
 
-
-@login_required
-def search_results(request, collection_id):
-    return render(request, 'recipes/search_list_view.html')
