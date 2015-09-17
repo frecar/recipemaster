@@ -91,7 +91,6 @@ def view_collection(request, collection_id):
     if request.POST:
         form = SearchForm(request.POST)
         if form.is_valid:
-            print(request.POST)
             recipes = collection.recipes.filter(title__icontains=request.POST.get(key='search'))
             return render(request, 'recipes/view_collection.html', {
                 'collection': collection,
