@@ -16,7 +16,7 @@ class Tag(models.Model):
 
 class Recipe(models.Model):
     url = models.URLField()
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, db_index=True)
     html_content = models.TextField()
     tags = models.ManyToManyField(Tag, related_name='recipes', blank=True)
     creation_date = models.DateTimeField(auto_now_add=True, editable=False)
