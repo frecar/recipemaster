@@ -18,7 +18,7 @@ def index(request):
 def tag_filter(request, collection_id, slug):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     tag = get_object_or_404(Tag, slug=slug)
-    recipes = collection.recipes.filter(tags=tag).order_by('id')
+    recipes = collection.recipes.filter(tags=tag).order_by('title')
     form = SearchForm()
     if request.GET.get('search'):
         form = SearchForm(request.GET)
