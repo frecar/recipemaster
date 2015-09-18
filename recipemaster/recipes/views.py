@@ -19,9 +19,26 @@ def tag_filter(request, collection_id, slug):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     tag = get_object_or_404(Tag, slug=slug)
     recipes = collection.recipes.filter(tags=tag).order_by('id')
+    form = SearchForm()
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query_string = form.cleaned_data['search']
+            entry_query = get_query(query_string, ['title'])
+            recipes = collection.recipes.filter(entry_query, tags=tag,).order_by('title')
+            return render(request, 'recipes/view_collection.html', {
+                'collection': collection,
+                'form': form,
+                'query': query_string,
+                'recipes': recipes
+            })
+        else:
+            messages.error(request, 'Could not search. Please try again.')
+
     return render(request, 'recipes/view_collection.html', {
         'collection': collection,
-        'recipes': recipes
+        'recipes': recipes,
+        'form': form
     })
 
 
