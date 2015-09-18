@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from recipemaster.recipes.forms import RecipeForm, CollectionForm, SearchForm
 from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 from .forms import AddUserForm
+from recipemaster.recipes.search import get_query
 
 
 @login_required
@@ -85,16 +86,20 @@ def delete_collection(request, collection_id):
 
 @login_required
 def view_collection(request, collection_id):
+    query_string = ''
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
-    recipes = collection.recipes.all()
+    recipes = collection.recipes.all().order_by('title')
     form = SearchForm()
-    if request.POST:
+    if request.method == 'POST':
         form = SearchForm(request.POST)
-        if form.is_valid:
-            recipes = collection.recipes.filter(title__icontains=request.POST.get(key='search'))
+        if form.is_valid():
+            query_string = form.cleaned_data['search']
+            entry_query = get_query(query_string, ['title'])
+            recipes = collection.recipes.filter(entry_query).order_by('title')
             return render(request, 'recipes/view_collection.html', {
                 'collection': collection,
                 'form': form,
+                'query': query_string,
                 'recipes': recipes
             })
         else:
