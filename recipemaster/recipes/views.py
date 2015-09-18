@@ -20,8 +20,8 @@ def tag_filter(request, collection_id, slug):
     tag = get_object_or_404(Tag, slug=slug)
     recipes = collection.recipes.filter(tags=tag).order_by('id')
     form = SearchForm()
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
+    if request.GET.get('search'):
+        form = SearchForm(request.GET)
         if form.is_valid():
             query_string = form.cleaned_data['search']
             entry_query = get_query(query_string, ['title'])
@@ -107,8 +107,8 @@ def view_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     recipes = collection.recipes.all().order_by('title')
     form = SearchForm()
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
+    if request.GET.get('search'):
+        form = SearchForm(request.GET)
         if form.is_valid():
             query_string = form.cleaned_data['search']
             entry_query = get_query(query_string, ['title'])

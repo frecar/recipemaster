@@ -41,6 +41,6 @@ class SearchForm(forms.Form):
     search = forms.CharField(
         max_length=100,
         label='',
-        required=True,
+        required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Search for recipes'})
     )
