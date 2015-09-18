@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h2>
+            <h2 class="collection-title">
                 <a href="{% url 'recipes:view_collection' collection.id %}">{{ collection.title }}</a>
                 <a href="{% url 'recipes:add_recipe_to_collection' collection.id %}"><span
                     class="glyphicon glyphicon-plus"></span></a>
