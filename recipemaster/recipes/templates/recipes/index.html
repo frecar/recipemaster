@@ -10,7 +10,6 @@
                         <li>
                             <a href="{% url 'recipes:view_collection' collection.id %}"
                                class="title">{{ collection.title }}</a>
-                            {% if user.is_staff %}
                                 <div class="admin-buttons">
                                     <a href="{% url 'recipes:edit_collection' collection.id %}"><span
                                             class="glyphicon glyphicon-pencil"></span></a>
@@ -27,7 +26,6 @@
                                     </form>
                                     <a href="{% url 'recipes:add_user_to_collection' collection.id%}"><span class="glyphicon glyphicon-user"></span></a>
                                 </div>
-                            {% endif %}
 
                         </li>
                     {% endfor %}
