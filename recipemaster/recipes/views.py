@@ -169,7 +169,7 @@ def add_user_to_collection(request, collection_id):
         if form.is_valid():
             user = User.objects.get(username=form.cleaned_data['username'])
             collection.users.add(user)
-            messages.success(request, 'User added to collection')
+            messages.success(request, 'User {} added to collection'.format(user.username))
             return redirect('recipes:view_collection', collection_id=collection.pk)
         else:
             messages.error(request, 'Could not add user. Please try again.')
