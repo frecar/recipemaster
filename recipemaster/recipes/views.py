@@ -67,7 +67,7 @@ def delete_recipe(request, recipe_id):
             recipe.delete()
             messages.success(request, 'Deleted recipe')
         else:
-            messages.error(request, 'Could not delete recipe. Try again. ')
+            messages.error(request, 'Could not delete the recipe. Please try again. ')
     return redirect('recipes:index')
 
 
@@ -135,7 +135,9 @@ def remove_recipe_from_collection(request, collection_id, recipe_id):
     if request.POST:
         if request.POST.get('delete') == 'yes':
             collection.recipes.remove(recipe)
-            messages.success(request, 'Removed recipe from {}'.format(collection.title))
+            messages.success(
+                request,
+                'Removed recipe {} from collection {}'.format(recipe.title, collection.title))
         else:
             messages.error(request, 'Could not delete recipe. Try again. ')
     return redirect('recipes:view_collection', collection_id=collection.pk)
