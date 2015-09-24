@@ -7,6 +7,7 @@ from recipemaster.recipes.forms import RecipeForm, CollectionForm, SearchForm
 from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
 from .forms import AddUserForm
 from recipemaster.recipes.search import get_query
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @login_required
@@ -169,13 +170,14 @@ def add_user_to_collection(request, collection_id):
     if request.POST:
         form = AddUserForm(request.POST)
         if form.is_valid():
-            user = User.objects.get(username=form.cleaned_data['username'])
-            collection.users.add(user)
-            messages.success(
-                request,
-                'Added {} to collection {}'.format(user.username, collection.title))
-            return redirect('recipes:view_collection', collection_id=collection.pk)
-        else:
-            messages.error(request, 'Could not add user. Please try again.')
+            try:
+                user = User.objects.get(username=form.cleaned_data['username'])
+                collection.users.add(user)
+                messages.success(
+                    request,
+                    'Added {} to collection {}'.format(user.username, collection.title))
+                return redirect('recipes:view_collection', collection_id=collection.pk)
+            except ObjectDoesNotExist:
+                messages.error(request, 'User does not exist')
     return render(request, 'recipes/add_user_to_collection.html', {
         'form': form, 'collection': collection})
