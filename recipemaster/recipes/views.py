@@ -34,7 +34,7 @@ def tag_filter(request, collection_id, slug):
                 'recipes': recipes
             })
         else:
-            messages.error(request, 'Could not search. Please try again.')
+            messages.error(request, 'Was not able to filter. Please try again.')
 
     return render(request, 'recipes/view_collection.html', {
         'collection': collection,
@@ -98,7 +98,7 @@ def delete_collection(request, collection_id):
             collection.delete()
             messages.success(request, 'Deleted collection')
         else:
-            messages.error(request, 'Could not delete collection. Try again. ')
+            messages.error(request, 'Could not delete collection. Please try again. ')
     return redirect('recipes:index')
 
 
@@ -140,7 +140,7 @@ def remove_recipe_from_collection(request, collection_id, recipe_id):
                 request,
                 'Removed recipe {} from collection {}'.format(recipe.title, collection.title))
         else:
-            messages.error(request, 'Could not delete recipe. Try again. ')
+            messages.error(request, 'Could not delete recipe. Please try again. ')
     return redirect('recipes:view_collection', collection_id=collection.pk)
 
 
