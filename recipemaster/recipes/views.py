@@ -49,7 +49,7 @@ def edit_recipe(request, recipe_id=None):
     if recipe_id:
         recipe = get_object_or_404(Recipe, pk=recipe_id, collections__users=request.user)
     form = RecipeForm(instance=recipe)
-    if request.POST:
+    if request.method == 'POST':
         form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
@@ -63,7 +63,7 @@ def edit_recipe(request, recipe_id=None):
 @staff_member_required
 def delete_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
-    if request.POST:
+    if request.method == 'POST':
         if request.POST.get('delete') == 'yes':
             recipe.delete()
             messages.success(request, 'Deleted recipe')
@@ -78,7 +78,7 @@ def edit_collection(request, collection_id=None):
     if collection_id:
         collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     form = CollectionForm(instance=collection)
-    if request.POST:
+    if request.method == 'POST':
         form = CollectionForm(request.POST, instance=collection)
         if form.is_valid():
             collection = form.save()
@@ -93,7 +93,7 @@ def edit_collection(request, collection_id=None):
 @login_required
 def delete_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
-    if request.POST:
+    if request.method == 'POST':
         if request.POST.get('delete') == 'yes':
             collection.delete()
             messages.success(request, 'Deleted collection')
@@ -133,7 +133,7 @@ def view_collection(request, collection_id):
 def remove_recipe_from_collection(request, collection_id, recipe_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     recipe = get_object_or_404(Recipe, pk=recipe_id)
-    if request.POST:
+    if request.method == 'POST':
         if request.POST.get('delete') == 'yes':
             collection.recipes.remove(recipe)
             messages.success(
@@ -151,7 +151,7 @@ def edit_recipe_in_collection(request, collection_id, recipe_id=None):
     if recipe_id:
         recipe = get_object_or_404(Recipe, pk=recipe_id)
     form = RecipeForm(instance=recipe)
-    if request.POST:
+    if request.method == 'POST':
         form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             recipe = form.save()
@@ -167,7 +167,7 @@ def edit_recipe_in_collection(request, collection_id, recipe_id=None):
 def add_user_to_collection(request, collection_id):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     form = AddUserForm()
-    if request.POST:
+    if request.method == 'POST':
         form = AddUserForm(request.POST)
         if form.is_valid():
             try:
