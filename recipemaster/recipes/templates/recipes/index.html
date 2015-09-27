@@ -20,7 +20,7 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="delete" value="yes"/>
                                         <a href="javascript:;"
-                                           onclick="document.getElementById('delete-{{ collection.id }}').submit();">
+                                           onclick="confirm('Are you sure you wish to delete?') && document.getElementById('delete-{{ collection.id }}').submit();">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                     </form>
