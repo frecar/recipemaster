@@ -7,7 +7,7 @@ from django.contrib import messages
 
 def registration(request):
     form = SignUpForm()
-    if request.POST:
+    if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -20,7 +20,7 @@ def registration(request):
 
 def password_reset(request):
     form = PasswordResetForm()
-    if request.POST:
+    if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         if form.is_valid():
             form.save(request=request)
