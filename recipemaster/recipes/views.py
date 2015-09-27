@@ -15,6 +15,7 @@ def index(request):
     return render(request, 'recipes/index.html', {'collections': collections})
 
 
+@login_required
 def tag_filter(request, collection_id, slug):
     collection = get_object_or_404(RecipeCollection, pk=collection_id, users=request.user)
     tag = get_object_or_404(Tag, slug=slug)
