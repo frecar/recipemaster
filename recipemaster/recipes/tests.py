@@ -42,3 +42,8 @@ class EditCollectionTest(CreateUserMixin, TestCase):
         response = self.client.get(reverse('recipes:add_collection'))
         self.assertContains(response, 'Create collection')
         self.assertContains(response, '<form method="post">')
+
+    def test_add_collection_should_create_collection(self):
+        response = self.client.post(reverse('recipes:add_collection'), {'title': 'Dinners'})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(RecipeCollection.objects.last().title, 'Dinners')
