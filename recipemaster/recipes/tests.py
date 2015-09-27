@@ -5,11 +5,13 @@ from recipemaster.recipes.models import RecipeCollection, Tag, Recipe
 from unittest import mock
 
 
-class SmokeTestCase(TestCase):
-
+class CreateUserMixin(object):
     def setUp(self):
         self.user = User.objects.create_user('datusername', password='datpassword')
         self.client.login(username='datusername', password='datpassword')
+
+
+class SmokeTestCase(CreateUserMixin, TestCase):
 
     def test_index(self):
         response = self.client.get(reverse('recipes:index'))
@@ -32,3 +34,11 @@ class SmokeTestCase(TestCase):
         response = self.client.get(reverse('recipes:tag_filter', args=[collection.pk, tag.slug]))
         self.assertContains(response, 'super collection')
         self.assertContains(response, 'fish')
+
+
+class EditCollectionTest(CreateUserMixin, TestCase):
+
+    def test_add_collection_should_render_form(self):
+        response = self.client.get(reverse('recipes:add_collection'))
+        self.assertContains(response, 'Create collection')
+        self.assertContains(response, '<form method="post">')
