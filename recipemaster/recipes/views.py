@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
@@ -41,35 +40,6 @@ def tag_filter(request, collection_id, slug):
         'recipes': recipes,
         'form': form
     })
-
-
-@staff_member_required
-def edit_recipe(request, recipe_id=None):
-    recipe = Recipe()
-    if recipe_id:
-        recipe = get_object_or_404(Recipe, pk=recipe_id, collections__users=request.user)
-    form = RecipeForm(instance=recipe)
-    if request.method == 'POST':
-        form = RecipeForm(request.POST, instance=recipe)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Saved recipe')
-            return redirect('recipes:index')
-    return render(request, 'recipes/edit_recipe.html', {
-        'form': form
-    })
-
-
-@staff_member_required
-def delete_recipe(request, recipe_id):
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    if request.method == 'POST':
-        if request.POST.get('delete') == 'yes':
-            recipe.delete()
-            messages.success(request, 'Deleted recipe')
-        else:
-            messages.error(request, 'Could not delete the recipe. Please try again. ')
-    return redirect('recipes:index')
 
 
 @login_required

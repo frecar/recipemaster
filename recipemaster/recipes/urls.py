@@ -8,9 +8,6 @@ urlpatterns = patterns(
     '',
     url(r'^$', views.index, name='index'),
     url(r'^feed/$', LatestRecipes()),
-    url(r'^add/$', views.edit_recipe, name='add'),
-    url(r'^(?P<recipe_id>\d+)/edit/$', views.edit_recipe, name='edit'),
-    url(r'^(?P<recipe_id>\d+)/delete/$', views.delete_recipe, name='delete'),
     url(r'^collections/add/$', views.edit_collection, name='add_collection'),
     url(
         r'^collections/(?P<collection_id>\d+)/delete/$',
