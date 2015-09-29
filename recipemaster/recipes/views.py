@@ -34,7 +34,7 @@ def tag_filter(request, collection_id, slug):
                 'recipes': recipes
             })
         else:
-            messages.error(request, 'Was not able to filter. Please try again.')
+            messages.error(request, 'Could not filter. Please try again.')
 
     return render(request, 'recipes/view_collection.html', {
         'collection': collection,
