@@ -11,7 +11,7 @@ def registration(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'User created. Please login.')
+            messages.success(request, 'User successfully created. Now you can login.')
             return redirect('recipes:index')
         else:
             messages.error(request, 'Could not create user. Please try again.')
