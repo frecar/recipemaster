@@ -7,3 +7,6 @@ tasks:
 coverage:
   path: coverage.xml
   parser: python
+
+setup_tasks:
+  - pip install coverage==3.7
