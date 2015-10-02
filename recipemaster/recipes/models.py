@@ -1,8 +1,8 @@
+import requests
+from autoslug import AutoSlugField
+from colorfield.fields import ColorField
 from django.conf import settings
 from django.db import models
-from colorfield.fields import ColorField
-from autoslug import AutoSlugField
-import requests
 
 
 class Tag(models.Model):

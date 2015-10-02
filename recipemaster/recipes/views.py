@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404, redirect
-from recipemaster.recipes.forms import RecipeForm, CollectionForm, SearchForm
-from recipemaster.recipes.models import Recipe, Tag, RecipeCollection
-from .forms import AddUserForm
-from recipemaster.recipes.search import get_query
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404, redirect, render
+
+from recipemaster.recipes.forms import CollectionForm, RecipeForm, SearchForm
+from recipemaster.recipes.models import Recipe, RecipeCollection, Tag
+from recipemaster.recipes.search import get_query
+
+from .forms import AddUserForm
 
 
 @login_required

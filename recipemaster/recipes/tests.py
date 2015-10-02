@@ -1,8 +1,10 @@
+from unittest import mock
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from recipemaster.recipes.models import RecipeCollection, Tag, Recipe
-from unittest import mock
+
+from recipemaster.recipes.models import Recipe, RecipeCollection, Tag
 
 
 class CreateUserMixin(object):

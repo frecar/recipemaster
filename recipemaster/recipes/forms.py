@@ -1,8 +1,9 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+
 from recipemaster.recipes.models import Recipe, RecipeCollection
-from django import forms
 
 
 class RecipeForm(ModelForm):

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from django.contrib import messages
 from django.contrib.auth.forms import PasswordResetForm
 from django.shortcuts import redirect, render
+
 from recipemaster.recipes.forms import SignUpForm
-from django.contrib import messages
 
 
 def registration(request):

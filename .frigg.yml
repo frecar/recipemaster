@@ -1,4 +1,5 @@
 tasks:
+  - tox -e isort
   - tox -e tests
   - tox -e flake8
   - coverage report

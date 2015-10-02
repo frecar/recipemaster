@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, url
 
-from recipemaster.recipes.feeds import LatestRecipes
-
 from recipemaster.recipes import views
+from recipemaster.recipes.feeds import LatestRecipes
 
 urlpatterns = patterns(
     '',
