@@ -61,7 +61,20 @@ class EditCollectionTest(CreateUserMixin, TestCase):
         collection = RecipeCollection.objects.create(title='super collection')
         collection.users.add(self.user)
         response = self.client.post(
-            reverse('recipes:edit_collection', args=[collection.pk]), {'title': 'Desserts'}
+            reverse('recipes:edit_collection', args=[collection.pk]),
+            {'title': 'Desserts'}
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(RecipeCollection.objects.last().title, 'Desserts')
+
+
+class DeleteCollectionTest(CreateUserMixin, TestCase):
+
+    def test_delete_collection_should_remove_collection(self):
+        collection = RecipeCollection.objects.create(title='super collection')
+        collection.users.add(self.user)
+        response = self.client.post(
+            reverse('recipes:delete_collection', args=[collection.pk]),
+            {'delete': 'yes'})
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(RecipeCollection.objects.filter(pk=collection.id).exists())
