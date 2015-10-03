@@ -78,3 +78,11 @@ class DeleteCollectionTest(CreateUserMixin, TestCase):
             {'delete': 'yes'})
         self.assertEqual(response.status_code, 302)
         self.assertFalse(RecipeCollection.objects.filter(pk=collection.id).exists())
+
+    def test_delete_collection_should_not_delete_getrequests(self):
+        collection = RecipeCollection.objects.create(title='super collection')
+        collection.users.add(self.user)
+        response = self.client.get(
+            reverse('recipes:delete_collection', args=[collection.pk]))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(RecipeCollection.objects.filter(pk=collection.id).exists())
