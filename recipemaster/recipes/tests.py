@@ -86,3 +86,24 @@ class DeleteCollectionTest(CreateUserMixin, TestCase):
             reverse('recipes:delete_collection', args=[collection.pk]))
         self.assertEqual(response.status_code, 302)
         self.assertTrue(RecipeCollection.objects.filter(pk=collection.id).exists())
+
+
+class EditRecipeInCollectionTest(CreateUserMixin, TestCase):
+
+    def test_add_recipe_should_render_form(self):
+        collection = RecipeCollection.objects.create(title='super collection')
+        collection.users.add(self.user)
+        response = self.client.get(
+            reverse('recipes:add_recipe_to_collection', args=[collection.pk]))
+        self.assertContains(response, 'Add recipe')
+        self.assertContains(response, '<form method="post">')
+
+    def test_add_recipe_should_create_recipe(self):
+        collection = RecipeCollection.objects.create(title='super collection')
+        collection.users.add(self.user)
+        response = self.client.post(
+            reverse('recipes:add_recipe_to_collection', args=[collection.pk]),
+            {'title': 'Toast', 'url': 'http://agnethesoraa.com'}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(collection.recipes.last().title, 'Toast')
