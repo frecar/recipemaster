@@ -107,3 +107,24 @@ class EditRecipeInCollectionTest(CreateUserMixin, TestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(collection.recipes.last().title, 'Toast')
+
+    def test_edit_recipe_should_render_form(self):
+        collection = RecipeCollection.objects.create(title='super collection')
+        collection.users.add(self.user)
+        recipe = Recipe.objects.create(title='Toast')
+        response = self.client.get(
+            reverse('recipes:edit_recipe_in_collection', args=[collection.pk, recipe.pk])
+        )
+        self.assertContains(response, 'Edit recipe')
+        self.assertContains(response, '<form method="post">')
+
+    def test_edit_recipe_should_create_edited_recipe(self):
+        collection = RecipeCollection.objects.create(title='super collection')
+        collection.users.add(self.user)
+        recipe = Recipe.objects.create(title='Toast')
+        response = self.client.post(
+            reverse('recipes:edit_recipe_in_collection', args=[collection.pk, recipe.pk]),
+            {'title': 'Toast', 'url': 'http://agnethesoraa.com'}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(collection.recipes.last().title, 'Toast')

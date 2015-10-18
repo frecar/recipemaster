@@ -25,7 +25,8 @@ class Recipe(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.html_content = requests.get(self.url).text
+        if self.url:
+            self.html_content = requests.get(self.url).text
         super().save(*args, **kwargs)
 
 
